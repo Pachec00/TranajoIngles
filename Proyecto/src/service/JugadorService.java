@@ -3,6 +3,7 @@ package service;
 import java.sql.Connection;
 import java.sql.SQLIntegrityConstraintViolationException;
 
+import bd.OpenConnection;
 import dao.JugadorDao;
 import modelo.Jugador;
 

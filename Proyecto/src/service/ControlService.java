@@ -3,6 +3,7 @@ package service;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import bd.OpenConnection;
 import dao.controlDao;
 
 public class ControlService {
