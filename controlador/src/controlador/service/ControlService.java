@@ -16,14 +16,15 @@ public class ControlService {
 		openConnection = new OpenConnection();
 	}
 
-	public void consultarControlService() throws SQLException {
+	public Integer consultarControlService() throws SQLException {
 		Connection conn = null;
 
 		try {
 
 			conn = openConnection.getConnection();
 			ControlDao c = new ControlDao();
-			c.consultarControlDao(conn);
+			Integer num =c.consultarControlDao(conn);
+			return num;
 		} finally {
 			try {
 				conn.close();

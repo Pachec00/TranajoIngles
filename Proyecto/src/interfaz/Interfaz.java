@@ -17,6 +17,8 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
+import controlador.dao.ControlDao;
+import controlador.service.ControlService;
 import modelo.Preguntas;
 import service.PreguntasService;
 
@@ -28,7 +30,9 @@ public class Interfaz extends JPanel {
 	private static final long serialVersionUID = 2738291975208723435L;
 
 	private Timer timer;
+	private Timer timerInfinito;
 	private Integer segundos;
+	private Long segundosInfinito;
 	private JLabel lblTimer;
 	private PanelInicio pI;
 	private PreguntasService ps;
@@ -183,6 +187,27 @@ public class Interfaz extends JPanel {
 
 			}
 		};
+		ActionListener acTimerInfinito= new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Integer numeroin=0;
+				while ((segundosInfinito - 1000) / 1000 > -1) {
+					segundos = segundos - 1000;
+					ControlService cS = new ControlService();
+					
+				try {
+					numeroin=cS.consultarControlService();
+					System.out.println(numeroin);
+					if(numeroin==1) {
+						cambiarPregunta(id);
+					}
+				} catch (SQLException e1) {
+				}
+					
+				}
+			}
+		};
 		ActionListener acPasarPagina = new ActionListener() {
 
 			@Override
@@ -225,6 +250,9 @@ public class Interfaz extends JPanel {
 
 
 		timer = new Timer(1000, acTimer);
+		timerInfinito = new Timer(1000,acTimerInfinito);
+		segundosInfinito=1000000000000000000L;
+	
 		lblTimer = new JLabel("");
 		lblTimer.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblTimer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -235,7 +263,7 @@ public class Interfaz extends JPanel {
 		btnB.addActionListener(acComprobacionRespuesta);
 		btnC.addActionListener(acComprobacionRespuesta);
 		btnD.addActionListener(acComprobacionRespuesta);
-
+		
 	}
 
 	public Timer getTimer() {
