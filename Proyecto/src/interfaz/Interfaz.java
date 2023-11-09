@@ -56,7 +56,7 @@ public class Interfaz extends JPanel {
 		correcto=false;
 		primeraVez=true;
 		ps = new PreguntasService();
-		lblPuntuacion = new JLabel("Tu puntuacion es:");
+		lblPuntuacion = new JLabel("Points: ");
 		lblPuntuacion.setBounds(20, 27, 161, 111);
 		lblPuntuacion.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblPuntuacion.setHorizontalAlignment(SwingConstants.CENTER);
