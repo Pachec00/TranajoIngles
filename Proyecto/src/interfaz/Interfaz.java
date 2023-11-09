@@ -49,6 +49,7 @@ public class Interfaz extends JPanel {
 	public Boolean marcado;
 	private JButton btnPasarPagina;
 	private ActionListener acTimer;
+	private ActionListener acTimerInfinito;
 	private Boolean correcto;
 
 	public Interfaz(PanelInicio pI) throws SQLException {
@@ -56,9 +57,10 @@ public class Interfaz extends JPanel {
 		this.pI = pI;
 		setLayout(null);
 		setBounds(100, 100, 1980, 1060);
-		id=1;
-		correcto=false;
-		primeraVez=true;
+		id = 1;
+		correcto = false;
+		primeraVez = true;
+		marcado = false;
 		ps = new PreguntasService();
 		lblPuntuacion = new JLabel("Points: ");
 		lblPuntuacion.setBounds(20, 27, 161, 111);
@@ -75,18 +77,13 @@ public class Interfaz extends JPanel {
 		txtPregunta.setLineWrap(true);
 
 		pregunta = new Preguntas();
-		pregunta =ps.consultarPregunta(id);
-
-
-
-
-
+		pregunta = ps.consultarPregunta(id);
 
 		txtPregunta.setText(pregunta.getPregunta());
 		txtPregunta.setBounds(20, 149, 1882, 465);
 		add(txtPregunta);
 
-		 btnA = new JButton(pregunta.getListaRespuesta().get(0));
+		btnA = new JButton(pregunta.getListaRespuesta().get(0));
 		btnA.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnA.setOpaque(true);
 		btnA.setActionCommand("A");
@@ -95,7 +92,7 @@ public class Interfaz extends JPanel {
 		btnA.setBounds(20, 677, 812, 134);
 		add(btnA);
 
-		 btnB = new JButton(pregunta.getListaRespuesta().get(1));
+		btnB = new JButton(pregunta.getListaRespuesta().get(1));
 		btnB.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnB.setBackground(new Color(128, 255, 255));
 		btnB.setActionCommand("B");
@@ -103,26 +100,26 @@ public class Interfaz extends JPanel {
 		btnB.setBounds(20, 822, 812, 134);
 		add(btnB);
 
-		 btnC = new JButton(pregunta.getListaRespuesta().get(2));
+		btnC = new JButton(pregunta.getListaRespuesta().get(2));
 		btnC.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnC.setBackground(new Color(128, 255, 128));
 		btnC.setActionCommand("C");
 		btnA.setOpaque(true);
 		btnC.setBounds(1135, 677, 767, 134);
 		add(btnC);
-		//TODO poner flecha en la repuesta seleccionada, poner bonito el login, poner tamaño fijo a la ventana al frame, que sea fijo, quitar barra de arriba,
-		//hacer una aplicasdasacion aparte que cambie un registro en la base datos para pasar la pagina, tengo un boton que cada vez q le doy aumenta en uno ese valor de la base de datos
+		// TODO poner flecha en la repuesta seleccionada, poner bonito el login, poner
+		// tamaño fijo a la ventana al frame, que sea fijo, quitar barra de arriba,
+		// hacer una aplicasdasacion aparte que cambie un registro en la base datos para
+		// pasar la pagina, tengo un boton que cada vez q le doy aumenta en uno ese
+		// valor de la base de datos
 
-		 btnD = new JButton(pregunta.getListaRespuesta().get(3));
+		btnD = new JButton(pregunta.getListaRespuesta().get(3));
 		btnD.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnD.setActionCommand("D");
 		btnD.setBackground(new Color(255, 255, 128));
 		btnA.setOpaque(true);
 		btnD.setBounds(1135, 824, 767, 134);
 		add(btnD);
-
-
-
 
 		btnPasarPagina = new JButton("");
 		btnPasarPagina.setBorderPainted(false);
@@ -137,16 +134,15 @@ public class Interfaz extends JPanel {
 			e.printStackTrace();
 		}
 
-
 		btnPasarPagina.setBounds(1741, 48, 161, 90);
 		btnPasarPagina.setEnabled(false);
 		add(btnPasarPagina);
 
-		lblNumeroPregunta = new JLabel(id+"/10");
-		lblNumeroPregunta .setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNumeroPregunta .setHorizontalAlignment(SwingConstants.CENTER);
-		lblNumeroPregunta .setBounds(1602, 48, 129, 90);
-		add(lblNumeroPregunta );
+		lblNumeroPregunta = new JLabel(id + "/10");
+		lblNumeroPregunta.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNumeroPregunta.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNumeroPregunta.setBounds(1602, 48, 129, 90);
+		add(lblNumeroPregunta);
 
 		JLabel titulo = new JLabel("DO YOU WANT TO BE A ROBOT?");
 		titulo.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -154,7 +150,7 @@ public class Interfaz extends JPanel {
 		titulo.setBounds(387, 37, 1170, 101);
 		add(titulo);
 		segundos = 5000;
-		 acTimer = new ActionListener() {
+		acTimer = new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -163,48 +159,61 @@ public class Interfaz extends JPanel {
 					lblTimer.setVisible(true);
 					segundos = segundos - 1000;
 					lblTimer.setText(String.valueOf(segundos / 1000));
-				}else {
+				} else {
 					lblTimer.setVisible(false);
 					btnC.setEnabled(false);
 					btnA.setEnabled(false);
 					btnD.setEnabled(false);
 					btnB.setEnabled(false);
 					btnPasarPagina.setEnabled(true);
-					if(!marcado) {
-						correcto=false;
-					}//asdsadasdas
-					if(primeraVez) {
-						if(correcto) {
-						JOptionPane.showMessageDialog(null, "YOU ARE CORRECT, OLEEE", "CORRECT ANSWER", JOptionPane.INFORMATION_MESSAGE);
-						primeraVez=false;
-					}else{
-						JOptionPane.showMessageDialog(null, "THATS INCORRECT, NOT OLEEE", "WRONG ANSWER", JOptionPane.ERROR_MESSAGE);
-						primeraVez=false;
-					}
-					}
+					if (!marcado) {
+						correcto = false;
+					} // asdsadasdas
+					if (primeraVez) {
+						if (correcto) {
 
+							JOptionPane.showMessageDialog(null, "YOU ARE CORRECT, OLEEE", "CORRECT ANSWER",
+									JOptionPane.INFORMATION_MESSAGE);
+							primeraVez = false;
+
+						} else {
+
+							JOptionPane.showMessageDialog(null, "THATS INCORRECT, NOT OLEEE", "WRONG ANSWER",
+									JOptionPane.ERROR_MESSAGE);
+							primeraVez = false;
+
+						}
+						
+					}
+					empezarTimer();
 				}
 
 			}
 		};
-		ActionListener acTimerInfinito= new ActionListener() {
-			
+		acTimerInfinito = new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Integer numeroin=0;
+				Integer numeroin = 0;
 				while ((segundosInfinito - 1000) / 1000 > -1) {
-					segundos = segundos - 1000;
+					segundosInfinito = segundosInfinito - 1000;
 					ControlService cS = new ControlService();
-					
-				try {
-					numeroin=cS.consultarControlService();
-					System.out.println(numeroin);
-					if(numeroin==1) {
-						cambiarPregunta(id);
+
+					try {
+						numeroin = cS.consultarControlService();
+						System.out.println(numeroin);
+						if (numeroin == 1) {
+							pI.ponerPantalla();
+							cambiarPregunta(1);
+							break;
+						}else if(id+1==numeroin) {
+							id++;
+							cambiarPregunta(id);
+							break;
+						}
+					} catch (SQLException e1) {
 					}
-				} catch (SQLException e1) {
-				}
-					
+
 				}
 			}
 		};
@@ -212,46 +221,42 @@ public class Interfaz extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(id<10) {
+				if (id < 10) {
 					id++;
 					try {
 						cambiarPregunta(id);
-			// if id +1 == control --> id++ cambiar, si estoy en el 10 no hacerlo primer caso cuando control sea igual 1
+						// if id +1 == control --> id++ cambiar, si estoy en el 10 no hacerlo primer
+						// caso cuando control sea igual 1
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
 
-				}else {
-					//TODO poner posicion final con otra pantalla
+				} else {
+					// TODO poner posicion final con otra pantalla
 				}
-
 
 			}
 		};
 
-		ActionListener acComprobacionRespuesta= new ActionListener() {
+		ActionListener acComprobacionRespuesta = new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				marcado=true;
-				if(ps.validarRespuesta(pregunta, e.getActionCommand())){
-					correcto=true;
-				}else {
-					correcto=false;
+				marcado = true;
+				if (ps.validarRespuesta(pregunta, e.getActionCommand())) {
+					correcto = true;
+				} else {
+					correcto = false;
 				}
 				btnA.setEnabled(false);
 				btnB.setEnabled(false);
 				btnC.setEnabled(false);
 				btnD.setEnabled(false);
 
-
 			}
 		};
 
-
 		timer = new Timer(1000, acTimer);
-		timerInfinito = new Timer(1000,acTimerInfinito);
-		segundosInfinito=1000000000000000000L;
 	
 		lblTimer = new JLabel("");
 		lblTimer.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -263,7 +268,7 @@ public class Interfaz extends JPanel {
 		btnB.addActionListener(acComprobacionRespuesta);
 		btnC.addActionListener(acComprobacionRespuesta);
 		btnD.addActionListener(acComprobacionRespuesta);
-		
+
 	}
 
 	public Timer getTimer() {
@@ -275,7 +280,7 @@ public class Interfaz extends JPanel {
 	}
 
 	public void cambiarPregunta(Integer id) throws SQLException {
-		marcado=false;
+		marcado = false;
 		pregunta = ps.consultarPregunta(id);
 		txtPregunta.setText(pregunta.getPregunta());
 		btnA.setText(pregunta.getListaRespuesta().get(0));
@@ -289,12 +294,18 @@ public class Interfaz extends JPanel {
 		timer = new Timer(1000, acTimer);
 		btnPasarPagina.setEnabled(false);
 		segundos = 5000;
-		primeraVez=true;
-		lblNumeroPregunta.setText(id+"/10");
+		timer.start();
+		primeraVez = true;
+		lblNumeroPregunta.setText(id + "/10");
+		timerInfinito.stop();		
 		revalidate();
-
 
 	}
 
+	public void empezarTimer() {
+		timerInfinito = new Timer(1000, acTimerInfinito);
+		segundosInfinito = 1000000000000000000L;
+		timerInfinito.start();
+	}
 
 }

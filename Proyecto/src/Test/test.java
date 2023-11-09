@@ -18,7 +18,7 @@ public class test {
 //		js.registrarJugador(j);
 
 		PanelInicio pI = new PanelInicio();
-		Thread hiloPantalla = new Thread(pI);
+		
 		pI.inicializar();
 
 

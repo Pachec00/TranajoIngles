@@ -93,6 +93,8 @@ public class PanelInicio extends JFrame {
 						JOptionPane.showMessageDialog(null, "EL NOMBRE YA EXISTE", "ERROR", JOptionPane.ERROR_MESSAGE);
 
 					}
+					interfaz.empezarTimer();
+					
 
 				} catch (JugadorsServiceException e1) {
 					e1.printStackTrace();
@@ -101,21 +103,16 @@ public class PanelInicio extends JFrame {
 			}
 		};
 
-		ActionListener acPasarPagina = new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				interfaz.getTimer().start();
-
-				setContentPane(interfaz);
-				revalidate();
-			}
-		};
 		btnRegistrar.addActionListener(acRegistrarUsuario);
-		btnContinuar.addActionListener(acPasarPagina);
+	
 
 		setVisible(true);
 
+	}
+	public void ponerPantalla() {
+		setContentPane(interfaz);
+		revalidate();
 	}
 
 }
