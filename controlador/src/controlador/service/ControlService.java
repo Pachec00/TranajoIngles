@@ -16,7 +16,7 @@ public class ControlService {
 		openConnection = new OpenConnection();
 	}
 
-	public void controlService() throws SQLException {
+	public void consultarControlService() throws SQLException {
 		Connection conn = null;
 
 		try {
@@ -32,4 +32,23 @@ public class ControlService {
 			}
 		}
 	}
+	
+	
+	public void aumentarControlService() throws SQLException {
+		Connection conn = null;
+
+		try {
+
+			conn = openConnection.getConnection();
+			ControlDao c = new ControlDao();
+			c.aumentarControlDao(conn);
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+
+			}
+		}
+	}
+	
 }

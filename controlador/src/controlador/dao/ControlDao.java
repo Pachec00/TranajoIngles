@@ -32,7 +32,7 @@ public class ControlDao {
 		}
 	}
 	
-	public void aumentarControl(Connection conn) throws SQLException {
+	public void aumentarControlDao(Connection conn) throws SQLException {
 		PreparedStatement stmt = null;
 		
 		try {
