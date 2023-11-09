@@ -1,4 +1,4 @@
-package dao;
+package controlador.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class controlDao {
+public class ControlDao {
 
 	public Integer consultarControlDao(Connection conn) throws SQLException {
 		Statement stmt = null;
@@ -32,7 +32,7 @@ public class controlDao {
 		}
 	}
 	
-	public void controlDao(Connection conn) throws SQLException {
+	public void aumentarControl(Connection conn) throws SQLException {
 		PreparedStatement stmt = null;
 		
 		try {
