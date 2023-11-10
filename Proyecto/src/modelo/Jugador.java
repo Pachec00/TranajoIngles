@@ -6,7 +6,7 @@ public class Jugador {
 	private String nombre;
 	private Integer puntuacion;
 	private Integer tiempo;
-	private Integer activo;
+
 
 	public Jugador() {
 		puntuacion = 0;

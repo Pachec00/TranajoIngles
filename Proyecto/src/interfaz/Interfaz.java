@@ -17,7 +17,6 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
-import controlador.dao.ControlDao;
 import controlador.service.ControlService;
 import modelo.Preguntas;
 import service.PreguntasService;

@@ -24,13 +24,13 @@ public class JugadorDao {
 
 
 //ssa
-			while (rs.next()) {
+			if(rs.next()) {
 
 				jugador.setNombre(rs.getString("nombre"));
 				jugador.setId(rs.getInt("id"));
 				jugador.setPuntuacion(rs.getInt("puntuacion"));
 				jugador.setTiempo(rs.getInt("tiempo"));
-				jugador.setActivo(rs.getInt("activo"));
+				
 
 			}
 

@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 
 import controlador.service.ControlService;
 
-public class mainFrame extends JFrame {
+public class MainFrame extends JFrame {
 
 	/**
 	 * 
@@ -26,7 +26,7 @@ public class mainFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					mainFrame window = new mainFrame();
+					MainFrame window = new MainFrame();
 					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +38,7 @@ public class mainFrame extends JFrame {
 	/**
 	 * Create the application.
 	 */
-	public mainFrame() {
+	public MainFrame() {
 		setResizable(false);
 		initialize();
 	}
