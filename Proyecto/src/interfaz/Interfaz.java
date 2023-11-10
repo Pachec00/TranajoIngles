@@ -201,13 +201,14 @@ public class Interfaz extends JPanel {
 					try {
 						numeroin = cS.consultarControlService();
 						System.out.println(numeroin);
-						if (numeroin == 1) {
+						if (numeroin == id && id==1) {
 							pI.ponerPantalla();
+							id++;
 							cambiarPregunta(1);
 							break;
-						}else if(id+1==numeroin) {
-							id++;
+						}else if(id==numeroin) {
 							cambiarPregunta(id);
+							id++;
 							break;
 						}
 					} catch (SQLException e1) {
