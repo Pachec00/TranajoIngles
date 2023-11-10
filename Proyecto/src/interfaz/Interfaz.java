@@ -294,10 +294,11 @@ public class Interfaz extends JPanel {
 		timer = new Timer(1000, acTimer);
 		btnPasarPagina.setEnabled(false);
 		segundos = 5000;
+		timerInfinito.stop();
 		timer.start();
 		primeraVez = true;
 		lblNumeroPregunta.setText(id + "/10");
-		timerInfinito.stop();		
+				
 		revalidate();
 
 	}
