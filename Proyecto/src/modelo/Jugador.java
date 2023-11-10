@@ -44,12 +44,5 @@ public class Jugador {
 		this.tiempo = tiempo;
 	}
 
-	public Integer getActivo() {
-		return activo;
-	}
-
-	public void setActivo(Integer activo) {
-		this.activo = activo;
-	}
-
+	//456
 }
