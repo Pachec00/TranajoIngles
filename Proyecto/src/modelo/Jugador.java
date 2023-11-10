@@ -44,5 +44,5 @@ public class Jugador {
 		this.tiempo = tiempo;
 	}
 
-	//456
+
 }
