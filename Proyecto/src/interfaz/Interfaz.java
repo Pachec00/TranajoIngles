@@ -46,7 +46,6 @@ public class Interfaz extends JPanel {
 	private Boolean primeraVez;
 	private Integer id;
 	public Boolean marcado;
-	private JButton btnPasarPagina;
 	private ActionListener acTimer;
 	private ActionListener acTimerInfinito;
 	private Boolean correcto;
@@ -120,22 +119,6 @@ public class Interfaz extends JPanel {
 		btnD.setBounds(1135, 824, 767, 134);
 		add(btnD);
 
-		btnPasarPagina = new JButton("");
-		btnPasarPagina.setBorderPainted(false);
-		btnPasarPagina.setBackground(new Color(255, 255, 128));
-		btnPasarPagina.setOpaque(true);
-
-		try {
-			URL url = new URL("https://cdn-icons-png.flaticon.com/128/3248/3248150.png");
-			ImageIcon img = new ImageIcon(url);
-			btnPasarPagina.setIcon(img);
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-
-		btnPasarPagina.setBounds(1741, 48, 161, 90);
-		btnPasarPagina.setEnabled(false);
-		add(btnPasarPagina);
 
 		lblNumeroPregunta = new JLabel(id + "/10");
 		lblNumeroPregunta.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -164,10 +147,10 @@ public class Interfaz extends JPanel {
 					btnA.setEnabled(false);
 					btnD.setEnabled(false);
 					btnB.setEnabled(false);
-					btnPasarPagina.setEnabled(true);
+					
 					if (!marcado) {
 						correcto = false;
-					} // asdsadasdas
+					} 
 					if (primeraVez) {
 						if (correcto) {
 
@@ -216,26 +199,7 @@ public class Interfaz extends JPanel {
 				
 			}
 		};
-		ActionListener acPasarPagina = new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (id < 10) {
-					id++;
-					try {
-						cambiarPregunta(id);
-						// if id +1 == control --> id++ cambiar, si estoy en el 10 no hacerlo primer
-						// caso cuando control sea igual 1
-					} catch (SQLException e1) {
-						e1.printStackTrace();
-					}
-
-				} else {
-					// TODO poner posicion final con otra pantalla
-				}
-
-			}
-		};
+		
 
 		ActionListener acComprobacionRespuesta = new ActionListener() {
 
@@ -262,7 +226,6 @@ public class Interfaz extends JPanel {
 		lblTimer.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTimer.setBounds(904, 715, 150, 65);
 		add(lblTimer);
-		btnPasarPagina.addActionListener(acPasarPagina);
 		btnA.addActionListener(acComprobacionRespuesta);
 		btnB.addActionListener(acComprobacionRespuesta);
 		btnC.addActionListener(acComprobacionRespuesta);
@@ -291,8 +254,8 @@ public class Interfaz extends JPanel {
 		btnD.setEnabled(true);
 		btnC.setEnabled(true);
 		timer = new Timer(1000, acTimer);
-		btnPasarPagina.setEnabled(false);
-		segundos = 5000;
+
+		segundos = 10000;
 		timerInfinito.stop();
 		timer.start();
 		primeraVez = true;
