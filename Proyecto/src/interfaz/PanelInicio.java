@@ -18,8 +18,14 @@ import service.JugadorService;
 import service.JugadorsServiceException;
 
 public class PanelInicio extends JFrame {
+	
+	
+
+	
 	public PanelInicio() {
+
 		getContentPane().setLayout(null);
+	
 	}
 
 	/**

@@ -120,6 +120,7 @@ public class Interfaz extends JPanel {
 		add(btnD);
 
 
+
 		lblNumeroPregunta = new JLabel(id + "/10");
 		lblNumeroPregunta.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNumeroPregunta.setHorizontalAlignment(SwingConstants.CENTER);
@@ -150,7 +151,7 @@ public class Interfaz extends JPanel {
 					
 					if (!marcado) {
 						correcto = false;
-					} 
+					} // asdsadasdas
 					if (primeraVez) {
 						if (correcto) {
 
