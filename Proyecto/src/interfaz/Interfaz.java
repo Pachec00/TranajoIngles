@@ -194,10 +194,9 @@ public class Interfaz extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Integer numeroin = 0;
-				while ((segundosInfinito - 1000) / 1000 > -1) {
+				
 					segundosInfinito = segundosInfinito - 1000;
 					ControlService cS = new ControlService();
-
 					try {
 						numeroin = cS.consultarControlService();
 						System.out.println(numeroin);
@@ -205,16 +204,16 @@ public class Interfaz extends JPanel {
 							pI.ponerPantalla();
 							id++;
 							cambiarPregunta(1);
-							break;
+						
 						}else if(id==numeroin) {
 							cambiarPregunta(id);
 							id++;
-							break;
+						
 						}
 					} catch (SQLException e1) {
 					}
 
-				}
+				
 			}
 		};
 		ActionListener acPasarPagina = new ActionListener() {
@@ -304,6 +303,7 @@ public class Interfaz extends JPanel {
 	}
 
 	public void empezarTimer() {
+		timer.stop();
 		timerInfinito = new Timer(1000, acTimerInfinito);
 		segundosInfinito = 1000000000000000000L;
 		timerInfinito.start();
