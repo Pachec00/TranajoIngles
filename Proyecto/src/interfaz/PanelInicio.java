@@ -1,5 +1,6 @@
 package interfaz;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
@@ -14,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import modelo.Jugador;
+import modelo.TextFieldCustom;
 import service.JugadorService;
 import service.JugadorsServiceException;
 
@@ -38,7 +40,7 @@ public class PanelInicio extends JFrame {
 	public void inicializar() throws JugadorsServiceException, SQLException {
 
 		interfaz = new Interfaz(this);
-
+		getContentPane().setBackground(Color.LIGHT_GRAY);
 		setTitle("You want to be a robot?");
 		setExtendedState(Frame.MAXIMIZED_BOTH);
 		setBounds(100, 100, 1980, 1060);
@@ -46,29 +48,30 @@ public class PanelInicio extends JFrame {
 		setLayout(null);
 
 		JLabel lblBienvenida = new JLabel("WELCOME");
-		lblBienvenida.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblBienvenida.setFont(new Font("Elephant", Font.PLAIN, 30));
 		lblBienvenida.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBienvenida.setBounds(10, 127, 1904, 111);
 		add(lblBienvenida);
 
 		JLabel lblNewLabel = new JLabel("TO");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblNewLabel.setFont(new Font("Elephant", Font.PLAIN, 30));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(10, 249, 1904, 85);
 		add(lblNewLabel);
 
-		JLabel lblQuien = new JLabel("WHO WANTS TO BE A ROBOT");
-		lblQuien.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		JLabel lblQuien = new JLabel("WHO WANTS TO BE A ROBOT!");
+		lblQuien.setFont(new Font("Elephant", Font.PLAIN, 30));
 		lblQuien.setHorizontalAlignment(SwingConstants.CENTER);
 		lblQuien.setBounds(10, 345, 1904, 203);
 		add(lblQuien);
 
 		JLabel lblUsuario = new JLabel("User");
+		lblUsuario.setFont(new Font("Elephant", Font.PLAIN, 20));
 		lblUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUsuario.setBounds(744, 663, 81, 32);
 		add(lblUsuario);
 
-		JTextField textFieldUsuario = new JTextField();
+		TextFieldCustom textFieldUsuario = new TextFieldCustom();
 		textFieldUsuario.setBounds(859, 663, 215, 32);
 		add(textFieldUsuario);
 		textFieldUsuario.setColumns(10);
@@ -76,11 +79,6 @@ public class PanelInicio extends JFrame {
 		JButton btnRegistrar = new JButton("Register");
 		btnRegistrar.setBounds(1122, 668, 89, 23);
 		add(btnRegistrar);
-
-		JButton btnContinuar = new JButton("Continue");
-		btnContinuar.setBounds(906, 848, 135, 69);
-		add(btnContinuar);
-		btnContinuar.setEnabled(false);
 
 		JugadorService js = new JugadorService();
 		ActionListener acRegistrarUsuario = new ActionListener() {
@@ -93,7 +91,6 @@ public class PanelInicio extends JFrame {
 					jugador.setPuntuacion(0);
 					if (js.registrarJugador(jugador)) {
 						textFieldUsuario.setEnabled(false);
-						btnContinuar.setEnabled(true);
 						btnRegistrar.setEnabled(false);
 					} else {
 						JOptionPane.showMessageDialog(null, "EL NOMBRE YA EXISTE", "ERROR", JOptionPane.ERROR_MESSAGE);

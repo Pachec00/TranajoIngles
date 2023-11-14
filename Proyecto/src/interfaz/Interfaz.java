@@ -49,6 +49,10 @@ public class Interfaz extends JPanel {
 	private ActionListener acTimer;
 	private ActionListener acTimerInfinito;
 	private Boolean correcto;
+	private JLabel flechaB;
+	private JLabel flechaC;
+	private JLabel flechaD;
+	private JLabel flechaA;
 
 	public Interfaz(PanelInicio pI) throws SQLException {
 
@@ -107,9 +111,6 @@ public class Interfaz extends JPanel {
 		add(btnC);
 		// TODO poner flecha en la repuesta seleccionada, poner bonito el login, poner
 		// tamaño fijo a la ventana al frame, que sea fijo, quitar barra de arriba,
-		// hacer una aplicasdasacion aparte que cambie un registro en la base datos para
-		// pasar la pagina, tengo un boton que cada vez q le doy aumenta en uno ese
-		// valor de la base de datos
 
 		btnD = new JButton(pregunta.getListaRespuesta().get(3));
 		btnD.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -118,8 +119,6 @@ public class Interfaz extends JPanel {
 		btnA.setOpaque(true);
 		btnD.setBounds(1135, 824, 767, 134);
 		add(btnD);
-
-
 
 		lblNumeroPregunta = new JLabel(id + "/10");
 		lblNumeroPregunta.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -148,7 +147,7 @@ public class Interfaz extends JPanel {
 					btnA.setEnabled(false);
 					btnD.setEnabled(false);
 					btnB.setEnabled(false);
-					
+
 					if (!marcado) {
 						correcto = false;
 					} // asdsadasdas
@@ -166,7 +165,7 @@ public class Interfaz extends JPanel {
 							primeraVez = false;
 
 						}
-						
+
 					}
 					empezarTimer();
 				}
@@ -178,29 +177,27 @@ public class Interfaz extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Integer numeroin = 0;
-				
-					segundosInfinito = segundosInfinito - 1000;
-					ControlService cS = new ControlService();
-					try {
-						numeroin = cS.consultarControlService();
-						System.out.println(numeroin);
-						if (numeroin == id && id==1) {
-							pI.ponerPantalla();
-							id++;
-							cambiarPregunta(1);
-						
-						}else if(id==numeroin) {
-							cambiarPregunta(id);
-							id++;
-						
-						}
-					} catch (SQLException e1) {
-					}
 
-				
+				segundosInfinito = segundosInfinito - 1000;
+				ControlService cS = new ControlService();
+				try {
+					numeroin = cS.consultarControlService();
+					System.out.println(numeroin);
+					if (numeroin == id && id == 1) {
+						pI.ponerPantalla();
+						id++;
+						cambiarPregunta(1);
+
+					} else if (id == numeroin) {
+						cambiarPregunta(id);
+						id++;
+
+					}
+				} catch (SQLException e1) {
+				}
+
 			}
 		};
-		
 
 		ActionListener acComprobacionRespuesta = new ActionListener() {
 
@@ -212,21 +209,60 @@ public class Interfaz extends JPanel {
 				} else {
 					correcto = false;
 				}
+				if(e.getActionCommand().equals("A")) {
+					flechaA.setVisible(true);
+				}else if(e.getActionCommand().equals("B")) {
+					flechaB.setVisible(true);
+				}else if(e.getActionCommand().equals("C")) {
+					flechaC.setVisible(true);
+				}else if(e.getActionCommand().equals("D")) {
+					flechaD.setVisible(true);
+				}
+
 				btnA.setEnabled(false);
 				btnB.setEnabled(false);
 				btnC.setEnabled(false);
 				btnD.setEnabled(false);
 
+//				Integer segundosPuntuacion=10-(segundos/1000)
 			}
 		};
 
 		timer = new Timer(1000, acTimer);
-	
+
 		lblTimer = new JLabel("");
+		lblTimer.setHorizontalTextPosition(SwingConstants.LEFT);
 		lblTimer.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblTimer.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTimer.setBounds(904, 715, 150, 65);
 		add(lblTimer);
+
+		flechaB = new JLabel("<---");
+		flechaB.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		flechaB.setBounds(838, 855, 119, 81);
+		add(flechaB);
+
+		flechaC = new JLabel("--->");
+		flechaC.setHorizontalAlignment(SwingConstants.RIGHT);
+		flechaC.setBounds(1031, 720, 94, 60);
+		flechaC.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		add(flechaC);
+
+		flechaD = new JLabel("--->");
+		flechaD.setHorizontalAlignment(SwingConstants.RIGHT);
+		flechaD.setBounds(997, 855, 128, 81);
+		flechaD.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		add(flechaD);
+		flechaA = new JLabel("<---");
+		flechaA.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		flechaA.setBounds(842, 715, 115, 65);
+		add(flechaA);
+		flechaA.setVisible(false);
+		flechaB.setVisible(false);
+		flechaC.setVisible(false);
+		flechaD.setVisible(false);
+		
+	
 		btnA.addActionListener(acComprobacionRespuesta);
 		btnB.addActionListener(acComprobacionRespuesta);
 		btnC.addActionListener(acComprobacionRespuesta);
@@ -254,6 +290,10 @@ public class Interfaz extends JPanel {
 		btnB.setEnabled(true);
 		btnD.setEnabled(true);
 		btnC.setEnabled(true);
+		flechaA.setVisible(false);
+		flechaB.setVisible(false);
+		flechaC.setVisible(false);
+		flechaD.setVisible(false);
 		timer = new Timer(1000, acTimer);
 
 		segundos = 10000;
@@ -261,7 +301,7 @@ public class Interfaz extends JPanel {
 		timer.start();
 		primeraVez = true;
 		lblNumeroPregunta.setText(id + "/10");
-				
+
 		revalidate();
 
 	}
