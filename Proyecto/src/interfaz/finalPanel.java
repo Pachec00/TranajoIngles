@@ -1,41 +1,58 @@
 package interfaz;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
 import java.awt.Font;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
+
+import modelo.TablaModel;
 
 public class finalPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private JTable table;
+	private TablaModel model;
+	private PanelInicio pI;
 
 
 	public finalPanel() {
 		
-		
+		pI=new PanelInicio();
 		setBounds(100, 100, 1980, 1060);
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Congratulations!!!");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		lblNewLabel.setBounds(837, 113, 431, 54);
+		lblNewLabel.setBounds(676, 185, 431, 54);
 		add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Your points:");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		lblNewLabel_1.setBounds(871, 308, 226, 82);
-		add(lblNewLabel_1);
+		JLabel lblRanking = new JLabel("Final Ranking");
+		lblRanking.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		lblRanking.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRanking.setBounds(763, 313, 265, 90);
+		add(lblRanking);
 		
-		JLabel lblNewLabel_2 = new JLabel("PUNTOS");
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		lblNewLabel_2.setBounds(1107, 329, 173, 40);
-		add(lblNewLabel_2);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(485, 414, 886, 533);
+		add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		
+		table.getTableHeader().setReorderingAllowed(false);
+		model= new TablaModel();
+		table.setModel(model);
+	
 		
 		
 		
+	}
+	public void crearTabla() {
+		model.setLista(pI);
 		
 		
 		

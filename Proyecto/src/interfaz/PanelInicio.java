@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import modelo.Jugador;
@@ -36,10 +35,12 @@ public class PanelInicio extends JFrame {
 	private static final long serialVersionUID = -2571490972066091586L;
 
 	private Interfaz interfaz;
+	private finalPanel fPanel;
 
 	public void inicializar() throws JugadorsServiceException, SQLException {
 
 		interfaz = new Interfaz(this);
+		fPanel = new finalPanel();
 		getContentPane().setBackground(Color.LIGHT_GRAY);
 		setTitle("You want to be a robot?");
 		setExtendedState(Frame.MAXIMIZED_BOTH);
@@ -115,6 +116,10 @@ public class PanelInicio extends JFrame {
 	}
 	public void ponerPantalla() {
 		setContentPane(interfaz);
+		revalidate();
+	}
+	public void cambiarPantallaFinal() {
+		setContentPane(fPanel);
 		revalidate();
 	}
 
