@@ -23,11 +23,6 @@ import service.JugadorsServiceException;
 public class PanelInicio extends JFrame {
 	public PanelInicio() {
 	}
-	
-	
-
-	
-	
 
 	/**
 	 *
@@ -36,7 +31,8 @@ public class PanelInicio extends JFrame {
 
 	private Interfaz interfaz;
 	private finalPanel fPanel;
-	private JugadorService js; 
+	private JugadorService js;
+	private Jugador jugador;
 
 	public void inicializar() throws JugadorsServiceException, SQLException {
 		js = new JugadorService();
@@ -81,15 +77,13 @@ public class PanelInicio extends JFrame {
 		JButton btnRegistrar = new JButton("Register");
 		btnRegistrar.setBounds(1122, 668, 89, 23);
 		getContentPane().add(btnRegistrar);
-		setContentPane(fPanel);
 
-		
 		ActionListener acRegistrarUsuario = new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Jugador jugador = new Jugador();
+					 jugador = new Jugador();
 					jugador.setNombre(textFieldUsuario.getText());
 					jugador.setPuntuacion(0);
 					if (js.registrarJugador(jugador)) {
@@ -100,7 +94,6 @@ public class PanelInicio extends JFrame {
 
 					}
 					interfaz.empezarTimer();
-					
 
 				} catch (JugadorsServiceException e1) {
 					e1.printStackTrace();
@@ -109,29 +102,40 @@ public class PanelInicio extends JFrame {
 			}
 		};
 
-
 		btnRegistrar.addActionListener(acRegistrarUsuario);
-	
 
 		setVisible(true);
 
 	}
+
 	public void ponerPantalla() {
 		setContentPane(interfaz);
 		revalidate();
 	}
+
 	public void cambiarPantallaFinal() {
 		setContentPane(fPanel);
 		revalidate();
 	}
+
 	public List<Jugador> crearTabla() {
-		List<Jugador> lista= new ArrayList<Jugador>();
+		List<Jugador> lista = new ArrayList<Jugador>();
 		try {
-			lista= js.consultarListaJugadoresService();
+			lista = js.consultarListaJugadoresService();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return lista;
+	}
+
+	public void añadirPuntuacion(Integer tiempo) {
+		
+		try {
+			js.insertarPuntuacionService(jugador, tiempo);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		
+	}
 
 }

@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 import controlador.service.ControlService;
+import modelo.Jugador;
 import modelo.Preguntas;
 import service.PreguntasService;
 
@@ -24,6 +25,7 @@ public class Interfaz extends JPanel {
      *
      */
     private static final long serialVersionUID = 2738291975208723435L;
+
 
     private Timer timer;
     private Timer timerInfinito;
@@ -185,12 +187,12 @@ public class Interfaz extends JPanel {
                         id++;
                         cambiarPregunta(1);
 
-                    } else if (id == numeroin) {
+                    } else if (id == numeroin && id<10) {
                         cambiarPregunta(id);
                         id++;
 
-                    }else if(id==10) {
-                        
+                    }else if(id==numeroin) {
+                        pI.cambiarPantallaFinal();
                     }
                 } catch (SQLException e1) {
                 }
@@ -222,8 +224,9 @@ public class Interfaz extends JPanel {
                 btnB.setEnabled(false);
                 btnC.setEnabled(false);
                 btnD.setEnabled(false);
-
+                
                 Integer segundosPuntuacion=25-(segundos/1000);
+                pI.añadirPuntuacion(segundosPuntuacion);
             }
         };
 
