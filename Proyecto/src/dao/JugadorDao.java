@@ -111,11 +111,11 @@ public class JugadorDao {
 		PreparedStatement stmt = null;
 
 		try {
-			String sql = "insert into jugadores (id,puntuacion) values(?,?)";
+			String sql = "insert into jugadores (puntuacion) values(?) where id = ?";
 			stmt = conn.prepareStatement(sql);
 
-			stmt.setInt(1, jugador.getId());
-			stmt.setInt(2, jugador.getPuntuacion());
+			stmt.setInt(1, jugador.getPuntuacion());
+			stmt.setInt(2, jugador.getId());
 			stmt.execute();
 		} finally {
 			try {
