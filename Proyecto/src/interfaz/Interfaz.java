@@ -192,6 +192,8 @@ public class Interfaz extends JPanel {
 						cambiarPregunta(id);
 						id++;
 
+					}else if(id==10) {
+						
 					}
 				} catch (SQLException e1) {
 				}
