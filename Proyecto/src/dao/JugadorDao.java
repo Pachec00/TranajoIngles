@@ -4,11 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import modelo.Jugador;
-import modelo.Preguntas;
 
 public class JugadorDao {
 
@@ -48,26 +48,27 @@ public class JugadorDao {
 		}
 	}
 	//TODO devuelva un jugador creado
-	public Boolean registrarJugadorDao(Connection conn, Jugador jugador) throws SQLException {
+	public Jugador registrarJugadorDao(Connection conn, Jugador jugador) throws SQLException {
 		PreparedStatement stmt = null;
-
+		ResultSet rs  =null;
+		
 		try {
 
-			boolean f = true;
+		
 			Jugador j = consultarJugadorDao(conn, jugador);
 			if (j.getNombre() != null) {
 				String sql = "insert into jugadores (nombre,puntuacion) values (?,?)";
-				stmt = conn.prepareStatement(sql);
-
+				stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				stmt.setString(1, jugador.getNombre().toLowerCase());
 				jugador.setPuntuacion(0);
 				stmt.setInt(2, jugador.getPuntuacion());
 				stmt.execute();
-			} else {
-				f = false;
-			}
+				rs = stmt.getGeneratedKeys();
+				rs.next();
+				jugador.setId(rs.getInt(1));
+			} 
 
-			return f;
+			return jugador;
 
 		} finally {
 			try {
@@ -111,7 +112,7 @@ public class JugadorDao {
 		PreparedStatement stmt = null;
 
 		try {
-			String sql = "insert into jugadores (puntuacion) values(?) where id = ?";
+			String sql = "UPDATE JUGADORES SET PUNTUACION=? WHERE ID=?";
 			stmt = conn.prepareStatement(sql);
 
 			stmt.setInt(1, jugador.getPuntuacion());

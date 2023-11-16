@@ -16,8 +16,9 @@ public class JugadorService {
 	public JugadorService() {
 		openConnection = new OpenConnection();
 	}
-	//TODO que devuelva jugador
-	public Boolean registrarJugador(Jugador jugador) throws JugadorsServiceException {
+
+	// TODO que devuelva jugador
+	public Jugador registrarJugador(Jugador jugador) throws JugadorsServiceException {
 		Connection conn = null;
 
 		try {
@@ -25,20 +26,16 @@ public class JugadorService {
 			conn = openConnection.getConnection();
 			JugadorDao jd = new JugadorDao();
 
-			Boolean r = jd.registrarJugadorDao(conn, jugador);
-
-			return r;
+			return jd.registrarJugadorDao(conn, jugador);
 
 			/*
 			 * TODO si devuelve false lanzar un mensaje de usuario ya existe en la interfaz.
 			 *
 			 */
 
-		} catch (SQLIntegrityConstraintViolationException e) {
-			System.out.println("El nombre de este usuario ya existe");
+		}
 
-			return false;
-		} catch (Exception e) {
+		catch (Exception e) {
 			System.err.println("Error en la base de datos");
 			throw new JugadorsServiceException("Error al insertar el jugador", e);
 
@@ -84,10 +81,10 @@ public class JugadorService {
 				jugador.setPuntuacion(50);
 			} else if (tiempo <= 20 && tiempo <= 24) {
 				jugador.setPuntuacion(25);
-			}else if (tiempo == 25) {
+			} else if (tiempo == 25) {
 				jugador.setPuntuacion(0);
 			}
-			
+
 			jd.insertarPuntuacionDao(conn, jugador);
 		} finally {
 			try {

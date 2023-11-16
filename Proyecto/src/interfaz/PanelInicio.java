@@ -87,7 +87,8 @@ public class PanelInicio extends JFrame {
 					jugador = new Jugador();
 					jugador.setNombre(textFieldUsuario.getText());
 					jugador.setPuntuacion(0);
-					if (js.registrarJugador(jugador)) {
+					jugador=js.registrarJugador(jugador);
+					if (jugador.getId()!=null) {
 						textFieldUsuario.setEnabled(false);
 						btnRegistrar.setEnabled(false);
 					} else {
