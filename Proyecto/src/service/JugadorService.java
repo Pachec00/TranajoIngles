@@ -34,7 +34,7 @@ public class JugadorService {
 			 *
 			 */
 
-		}catch (SQLIntegrityConstraintViolationException e) {
+		} catch (SQLIntegrityConstraintViolationException e) {
 			System.out.println("El nombre de este usuario ya existe");
 
 			return false;
@@ -50,38 +50,50 @@ public class JugadorService {
 			}
 		}
 	}
-	
+
 	public List<Jugador> consultarListaJugadoresService() throws SQLException {
 		Connection conn = null;
-		
+
 		try {
 			conn = openConnection.getConnection();
 			JugadorDao jd = new JugadorDao();
 			List<Jugador> jugadores = jd.consultarListaJugadoresDao(conn);
-			
+
 			return jugadores;
 		} finally {
 			try {
 				conn.close();
 			} catch (Exception e) {
-				
+
 			}
 		}
 	}
-	
+
 	public void insertarPuntuacionService(Jugador jugador, Integer tiempo) throws SQLException {
 		Connection conn = null;
-		
+
 		try {
 			conn = openConnection.getConnection();
 			JugadorDao jd = new JugadorDao();
+
+			if (tiempo <= 5 && tiempo <= 9) {
+				jugador.setPuntuacion(150);
+			} else if (tiempo <= 10 && tiempo <= 14) {
+				jugador.setPuntuacion(100);
+			} else if (tiempo <= 15 && tiempo <= 19) {
+				jugador.setPuntuacion(50);
+			} else if (tiempo <= 20 && tiempo <= 24) {
+				jugador.setPuntuacion(25);
+			}else if (tiempo == 25) {
+				jugador.setPuntuacion(0);
+			}
 			
-			//if(tiempo == 5)
+			jd.insertarPuntuacionDao(conn, jugador);
 		} finally {
 			try {
 				conn.close();
 			} catch (Exception e) {
-				
+
 			}
 		}
 	}

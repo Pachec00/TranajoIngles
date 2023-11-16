@@ -87,7 +87,7 @@ public class JugadorDao {
 		try {
 			String sql = "select * from jugadores";
 			stmt = conn.prepareStatement(sql);
-
+			rs = stmt.executeQuery();
 			while (rs.next()) {
 				Jugador jugador = new Jugador();
 				jugador.setId(rs.getInt("id"));
