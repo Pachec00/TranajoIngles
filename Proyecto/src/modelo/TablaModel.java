@@ -1,6 +1,5 @@
 package modelo;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,8 +38,8 @@ public class TablaModel extends AbstractTableModel {
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		Jugador jugador = lista.get(rowIndex);
 		if (columnIndex == 0) {
-			String marca = jugador.getNombre();
-			return marca;
+			String nombre = jugador.getNombre();
+			return nombre;
 
 		} else   {
 			return jugador.getPuntuacion();

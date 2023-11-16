@@ -18,9 +18,8 @@ public class finalPanel extends JPanel {
 	private PanelInicio pI;
 
 
-	public finalPanel() {
-		
-		pI=new PanelInicio();
+	public finalPanel(PanelInicio pI) {
+		this.pI=pI;
 		setBounds(100, 100, 1980, 1060);
 		setLayout(null);
 		
@@ -46,14 +45,15 @@ public class finalPanel extends JPanel {
 		table.getTableHeader().setReorderingAllowed(false);
 		model= new TablaModel();
 		table.setModel(model);
+		crearTabla();
 	
 		
 		
 		
 	}
 	public void crearTabla() {
-		model.setLista(pI);
-		
+		model.setLista(pI.crearTabla());
+		model.fireTableDataChanged();
 		
 		
 	}
