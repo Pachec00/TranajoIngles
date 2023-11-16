@@ -139,5 +139,15 @@ public class PanelInicio extends JFrame {
 		}
 		
 	}
+	public Jugador getJugador() {
+		return this.jugador;
+	}
+	public Integer consultarPuntuacion() {
+		
+		
+		
+		
+		return js.consultarPuntuacion(jugador);
+	}
 
 }

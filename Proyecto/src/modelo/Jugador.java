@@ -9,7 +9,7 @@ public class Jugador {
 
 
 	public Jugador() {
-		puntuacion = 0;
+		puntuacion = 3;
 	}
 
 	public Integer getId() {

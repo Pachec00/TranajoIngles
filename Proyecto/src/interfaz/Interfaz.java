@@ -47,6 +47,7 @@ public class Interfaz extends JPanel {
     public Boolean marcado;
     private ActionListener acTimer;
     private ActionListener acTimerInfinito;
+    private Jugador jugador;
     private Boolean correcto;
     private JLabel flechaB;
     private JLabel flechaC;
@@ -59,10 +60,13 @@ public class Interfaz extends JPanel {
         setLayout(null);
         setBounds(100, 100, 1980, 1060);
         id = 1;
+    
         correcto = false;
         primeraVez = true;
         marcado = false;
+        
         ps = new PreguntasService();
+        jugador=pI.getJugador();
         lblPuntuacion = new JLabel("Points: ");
         lblPuntuacion.setBounds(20, 27, 161, 111);
         lblPuntuacion.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -130,7 +134,7 @@ public class Interfaz extends JPanel {
         titulo.setHorizontalAlignment(SwingConstants.CENTER);
         titulo.setBounds(387, 37, 1170, 101);
         add(titulo);
-        segundos = 25000;
+        segundos = 2000;
         acTimer = new ActionListener() {
 
             @Override
@@ -299,12 +303,12 @@ public class Interfaz extends JPanel {
         flechaD.setVisible(false);
         timer = new Timer(1000, acTimer);
 
-        segundos = 25000;
+        segundos = 2000;
         timerInfinito.stop();
         timer.start();
         primeraVez = true;
-        lblNumeroPregunta.setText(id + "/10");
-
+        lblNumeroPregunta.setText(id + "/9");
+        lblPuntuacion.setText("Points: "+pI.consultarPuntuacion());
         revalidate();
 
     }

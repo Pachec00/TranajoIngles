@@ -17,7 +17,7 @@ public class JugadorService {
 		openConnection = new OpenConnection();
 	}
 
-	// TODO que devuelva jugador
+
 	public Jugador registrarJugador(Jugador jugador) throws JugadorsServiceException {
 		Connection conn = null;
 
@@ -28,10 +28,7 @@ public class JugadorService {
 
 			return jd.registrarJugadorDao(conn, jugador);
 
-			/*
-			 * TODO si devuelve false lanzar un mensaje de usuario ya existe en la interfaz.
-			 *
-			 */
+			
 
 		}
 
@@ -66,6 +63,7 @@ public class JugadorService {
 		}
 	}
 
+
 	public void insertarPuntuacionService(Jugador jugador, Integer tiempo) throws SQLException {
 		Connection conn = null;
 
@@ -93,6 +91,22 @@ public class JugadorService {
 
 			}
 		}
+	}
+	
+	public Integer consultarPuntuacion(Jugador jug) {
+		Connection conn = null;
+		JugadorDao jugadorDao = new JugadorDao();
+		Integer puntos = 0;
+		
+		
+		try {
+			conn = openConnection.getConnection();
+			puntos=jugadorDao.consultarPuntuacionDao(conn, jug);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return puntos;
+		
 	}
 
 }

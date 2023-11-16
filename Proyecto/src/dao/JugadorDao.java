@@ -60,7 +60,6 @@ public class JugadorDao {
 				String sql = "insert into jugadores (nombre,puntuacion) values (?,?)";
 				stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				stmt.setString(1, jugador.getNombre().toLowerCase());
-				jugador.setPuntuacion(0);
 				stmt.setInt(2, jugador.getPuntuacion());
 				stmt.execute();
 				rs = stmt.getGeneratedKeys();
@@ -134,9 +133,8 @@ public class JugadorDao {
 		try {
 			String sql = "select puntuacion from jugadores where id = ?";
 			stmt = conn.prepareStatement(sql);
-
 			stmt.setInt(1, jugador.getId());
-
+			rs = stmt.executeQuery();
 			if (rs.next()) {
 				jugador.setPuntuacion(rs.getInt("puntuacion"));
 			}
