@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import modelo.Jugador;
 import modelo.Preguntas;
@@ -22,15 +24,12 @@ public class JugadorDao {
 			stmt.setString(1, jugador.getNombre());
 			rs = stmt.executeQuery();
 
-
-//ssa
-			if(rs.next()) {
+			if (rs.next()) {
 
 				jugador.setNombre(rs.getString("nombre"));
 				jugador.setId(rs.getInt("id"));
 				jugador.setPuntuacion(rs.getInt("puntuacion"));
 				jugador.setTiempo(rs.getInt("tiempo"));
-				
 
 			}
 
@@ -64,7 +63,7 @@ public class JugadorDao {
 				jugador.setPuntuacion(0);
 				stmt.setInt(2, jugador.getPuntuacion());
 				stmt.execute();
-			}else {
+			} else {
 				f = false;
 			}
 
@@ -80,27 +79,25 @@ public class JugadorDao {
 
 	}
 
-	public void insertarPuntuacionDao(Connection conn, String respuesta, Integer idPregunta, Jugador jugador) throws SQLException {
+	public List<Jugador> consultarListaJugadoresDao(Connection conn) throws SQLException { //
 		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		List<Jugador> jugadores = new ArrayList<Jugador>();
 
 		try {
+			String sql = "select * from jugadores";
+			stmt = conn.prepareStatement(sql);
 
-			PreguntasDao pd = new PreguntasDao();
-			Preguntas p = new Preguntas();
-			p = pd.consultarPreguntaDao(conn, idPregunta);
-
-			//respuesta --> Opcion que elige el usuario
-
-			//Consulta de puntuacion
-
-			Integer puntos = consultarPuntuacionDao(conn, jugador.getId());
-
-			if (p.getRespuesta().equals(respuesta)) {
-				String sql = "insert into puntuacion values ?"; // Consultar puntuacuion que lleva el usuario para sumarla
-				stmt = conn.prepareStatement(sql);
-				stmt.setInt(1, 100+puntos); // TODO !!!!!!
-				stmt.execute();
+			while (rs.next()) {
+				Jugador jugador = new Jugador();
+				jugador.setId(rs.getInt("id"));
+				jugador.setNombre(rs.getString("nombre"));
+				jugador.setPuntuacion(rs.getInt("puntuacion"));
+				jugadores.add(jugador);
 			}
+
+			return jugadores;
+
 		} finally {
 			try {
 				stmt.close();
@@ -110,27 +107,40 @@ public class JugadorDao {
 		}
 	}
 
-	//!!!!! TODO hacer
-	public Integer consultarPuntuacionDao(Connection conn, Integer id) throws SQLException {
+	public void insertarPuntuacionDao(Connection conn, Jugador jugador) throws SQLException { //
+		PreparedStatement stmt = null;
+
+		try {
+			String sql = "insert into jugadores (id,puntuacion) values(?,?)";
+			stmt = conn.prepareStatement(sql);
+
+			stmt.setInt(1, jugador.getId());
+			stmt.setInt(2, jugador.getPuntuacion());
+			stmt.execute();
+		} finally {
+			try {
+				stmt.close();
+			} catch (Exception e) {
+
+			}
+		}
+	}
+
+	public Integer consultarPuntuacionDao(Connection conn, Jugador jugador) throws SQLException { //
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 
 		try {
-			//List<Jugador> listaPuntos = new ArrayList<Jugador>();
-			String sql = "select puntuacion from jugadores where ? = id";
+			String sql = "select puntuacion from jugadores where id = ?";
 			stmt = conn.prepareStatement(sql);
 
-			stmt.setInt(1, id);
-			rs = stmt.executeQuery();
+			stmt.setInt(1, jugador.getId());
 
-			Integer puntos = 0;
-			while (rs.next()) {
-				puntos = rs.getInt("puntuacion");
-				//listaPuntos.add(jugador);
+			if (rs.next()) {
+				jugador.setPuntuacion(rs.getInt("puntuacion"));
 			}
 
-			return puntos;
-
+			return jugador.getPuntuacion();
 		} finally {
 			try {
 				stmt.close();
@@ -139,17 +149,5 @@ public class JugadorDao {
 			}
 		}
 	}
-
-//	public Boolean jugadorActivo(Connection conn) throws SQLException {
-//
-//		Integer contador = 0; // Incrementar para recorrer BD por id
-//		Jugador jugador = new Jugador();
-//
-//
-//
-//
-//	}
-
-
 
 }

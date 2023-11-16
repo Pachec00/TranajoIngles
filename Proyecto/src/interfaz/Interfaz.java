@@ -150,7 +150,7 @@ public class Interfaz extends JPanel {
 
 					if (!marcado) {
 						correcto = false;
-					} // asdsadasdas
+					} 
 					if (primeraVez) {
 						if (correcto) {
 
@@ -226,7 +226,7 @@ public class Interfaz extends JPanel {
 				btnC.setEnabled(false);
 				btnD.setEnabled(false);
 
-//				Integer segundosPuntuacion=10-(segundos/1000)
+				Integer segundosPuntuacion=25-(segundos/1000);
 			}
 		};
 
