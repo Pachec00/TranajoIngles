@@ -83,7 +83,8 @@ public class PanelInicio extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					 jugador = new Jugador();
+					//TODO se guarda el jugador que devuelve el servicio
+					jugador = new Jugador();
 					jugador.setNombre(textFieldUsuario.getText());
 					jugador.setPuntuacion(0);
 					if (js.registrarJugador(jugador)) {

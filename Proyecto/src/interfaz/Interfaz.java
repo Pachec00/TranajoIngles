@@ -207,6 +207,8 @@ public class Interfaz extends JPanel {
                 marcado = true;
                 if (ps.validarRespuesta(pregunta, e.getActionCommand())) {
                     correcto = true;
+                    Integer segundosPuntuacion=25-(segundos/1000);
+                    pI.añadirPuntuacion(segundosPuntuacion);
                 } else {
                     correcto = false;
                 }
@@ -225,8 +227,7 @@ public class Interfaz extends JPanel {
                 btnC.setEnabled(false);
                 btnD.setEnabled(false);
                 
-                Integer segundosPuntuacion=25-(segundos/1000);
-                pI.añadirPuntuacion(segundosPuntuacion);
+                
             }
         };
 

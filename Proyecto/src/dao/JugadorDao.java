@@ -47,7 +47,7 @@ public class JugadorDao {
 			}
 		}
 	}
-
+	//TODO devuelva un jugador creado
 	public Boolean registrarJugadorDao(Connection conn, Jugador jugador) throws SQLException {
 		PreparedStatement stmt = null;
 

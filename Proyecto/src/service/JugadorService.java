@@ -16,7 +16,7 @@ public class JugadorService {
 	public JugadorService() {
 		openConnection = new OpenConnection();
 	}
-
+	//TODO que devuelva jugador
 	public Boolean registrarJugador(Jugador jugador) throws JugadorsServiceException {
 		Connection conn = null;
 
