@@ -1,7 +1,9 @@
 package service;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 
 import bd.OpenConnection;
 import dao.JugadorDao;
@@ -45,6 +47,41 @@ public class JugadorService {
 				conn.close();
 			} catch (Exception e2) {
 
+			}
+		}
+	}
+	
+	public List<Jugador> consultarListaJugadoresService() throws SQLException {
+		Connection conn = null;
+		
+		try {
+			conn = openConnection.getConnection();
+			JugadorDao jd = new JugadorDao();
+			List<Jugador> jugadores = jd.consultarListaJugadoresDao(conn);
+			
+			return jugadores;
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				
+			}
+		}
+	}
+	
+	public void insertarPuntuacionService(Jugador jugador, Integer tiempo) throws SQLException {
+		Connection conn = null;
+		
+		try {
+			conn = openConnection.getConnection();
+			JugadorDao jd = new JugadorDao();
+			
+			//if(tiempo == 5)
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				
 			}
 		}
 	}
