@@ -134,7 +134,7 @@ public class Interfaz extends JPanel {
         titulo.setHorizontalAlignment(SwingConstants.CENTER);
         titulo.setBounds(387, 37, 1170, 101);
         add(titulo);
-        segundos = 3000;
+        segundos = 25000;
         acTimer = new ActionListener() {
 
             @Override
@@ -303,7 +303,7 @@ public class Interfaz extends JPanel {
         flechaC.setVisible(false);
         flechaD.setVisible(false);
         timer = new Timer(1000, acTimer);
-        segundos = 3000;
+        segundos = 25000;
         timerInfinito.stop();
         timer.start();
         primeraVez = true;

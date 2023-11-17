@@ -21,7 +21,7 @@ public class test {
 		
 		pI.inicializar();
 
-
+//color en borde y fondo textfield cambiar colo al foco
 
 
 
