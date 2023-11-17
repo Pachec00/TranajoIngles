@@ -2,6 +2,7 @@ package interfaz;
 
 import java.awt.Font;
 import java.util.Comparator;
+import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -62,8 +63,8 @@ public class finalPanel extends JPanel {
 
 	}
 
-	public void crearTabla() {
-		model.setLista(pI.crearTabla());
+	public void crearTabla(List<Jugador> lista) {
+		model.setLista(lista);
 		model.fireTableDataChanged();
 
 	}

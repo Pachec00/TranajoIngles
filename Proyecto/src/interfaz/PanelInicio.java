@@ -121,14 +121,14 @@ public class PanelInicio extends JFrame {
 		revalidate();
 	}
 
-	public List<Jugador> crearTabla() {
+	public void crearTabla() {
 		List<Jugador> lista = new ArrayList<Jugador>();
 		try {
 			lista = js.consultarListaJugadoresService();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return lista;
+		fPanel.crearTabla(lista);
 	}
 
 	public void añadirPuntuacion(Integer tiempo) {
