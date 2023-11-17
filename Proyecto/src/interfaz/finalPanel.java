@@ -19,6 +19,7 @@ public class finalPanel extends JPanel {
 	private JTable table;
 	private TablaModel model;
 	private PanelInicio pI;
+	private Comparator<Jugador> a;
 
 	public finalPanel(PanelInicio pI) {
 		this.pI = pI;
@@ -50,7 +51,7 @@ public class finalPanel extends JPanel {
 
 
 	
-		Comparator<Jugador> a = new Comparator<Jugador>() {
+		 a= new Comparator<Jugador>() {
 
 			@Override
 			public int compare(Jugador o1, Jugador o2) {
@@ -59,12 +60,13 @@ public class finalPanel extends JPanel {
 			}
 
 		};
-		model.getLista().sort(a);
+		
 
 	}
 
 	public void crearTabla(List<Jugador> lista) {
 		model.setLista(lista);
+		model.getLista().sort(a);
 		model.fireTableDataChanged();
 
 	}
