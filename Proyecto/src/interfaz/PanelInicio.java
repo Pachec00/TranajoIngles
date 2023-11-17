@@ -91,11 +91,12 @@ public class PanelInicio extends JFrame {
 					if (jugador.getId()!=null) {
 						textFieldUsuario.setEnabled(false);
 						btnRegistrar.setEnabled(false);
+						interfaz.empezarTimer();
 					} else {
 						JOptionPane.showMessageDialog(null, "EL NOMBRE YA EXISTE", "ERROR", JOptionPane.ERROR_MESSAGE);
 
 					}
-					interfaz.empezarTimer();
+					
 
 				} catch (JugadorsServiceException e1) {
 					e1.printStackTrace();

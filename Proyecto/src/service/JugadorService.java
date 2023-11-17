@@ -17,22 +17,17 @@ public class JugadorService {
 		openConnection = new OpenConnection();
 	}
 
-
 	public Jugador registrarJugador(Jugador jugador) throws JugadorsServiceException {
 		Connection conn = null;
-
+		Jugador jug = new Jugador();
 		try {
 
 			conn = openConnection.getConnection();
 			JugadorDao jd = new JugadorDao();
+			jug = jd.registrarJugadorDao(conn, jugador);
+			return jug;
 
-			return jd.registrarJugadorDao(conn, jugador);
-
-			
-
-		}
-
-		catch (Exception e) {
+		}catch (Exception e) {
 			System.err.println("Error en la base de datos");
 			throw new JugadorsServiceException("Error al insertar el jugador", e);
 
@@ -43,6 +38,7 @@ public class JugadorService {
 
 			}
 		}
+		
 	}
 
 	public List<Jugador> consultarListaJugadoresService() throws SQLException {
@@ -62,7 +58,6 @@ public class JugadorService {
 			}
 		}
 	}
-
 
 	public void insertarPuntuacionService(Jugador jugador, Integer tiempo) throws SQLException {
 		Connection conn = null;
@@ -92,21 +87,20 @@ public class JugadorService {
 			}
 		}
 	}
-	
+
 	public Integer consultarPuntuacion(Jugador jug) {
 		Connection conn = null;
 		JugadorDao jugadorDao = new JugadorDao();
 		Integer puntos = 0;
-		
-		
+
 		try {
 			conn = openConnection.getConnection();
-			puntos=jugadorDao.consultarPuntuacionDao(conn, jug);
+			puntos = jugadorDao.consultarPuntuacionDao(conn, jug);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return puntos;
-		
+
 	}
 
 }
