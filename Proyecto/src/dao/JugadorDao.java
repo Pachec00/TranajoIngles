@@ -56,7 +56,7 @@ public class JugadorDao {
 
 		
 			Jugador j = consultarJugadorDao(conn, jugador);
-			if (j.getNombre() == null) {
+			if (j.getId() == null) {
 				String sql = "insert into jugadores (nombre,puntuacion) values (?,?)";
 				stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				stmt.setString(1, jugador.getNombre().toLowerCase());
