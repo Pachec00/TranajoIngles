@@ -46,7 +46,7 @@ public class finalPanel extends JPanel {
 		table.getTableHeader().setReorderingAllowed(false);
 		model = new TablaModel();
 		table.setModel(model);
-		crearTabla();
+
 
 	
 		Comparator<Jugador> a = new Comparator<Jugador>() {
