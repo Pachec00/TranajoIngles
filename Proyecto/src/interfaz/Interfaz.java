@@ -60,7 +60,8 @@ public class Interfaz extends JPanel {
         setLayout(null);
         setBounds(100, 100, 1980, 1060);
         id = 1;
-    
+   
+        puntos = 0;
         correcto = false;
         primeraVez = true;
         marcado = false;
@@ -307,7 +308,7 @@ public class Interfaz extends JPanel {
         timer.start();
         primeraVez = true;
         lblNumeroPregunta.setText(id + "/9");
-        puntos=puntos+pI.consultarPuntuacion();
+        puntos=pI.consultarPuntuacion();
         lblPuntuacion.setText("Points: "+puntos);
         revalidate();
 

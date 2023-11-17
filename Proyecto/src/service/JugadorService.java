@@ -65,19 +65,21 @@ public class JugadorService {
 		try {
 			conn = openConnection.getConnection();
 			JugadorDao jd = new JugadorDao();
-
+			Integer puntos = 0;
 			if (tiempo <= 5 && tiempo <= 9) {
-				jugador.setPuntuacion(150);
+				puntos = 150;
 			} else if (tiempo <= 10 && tiempo <= 14) {
-				jugador.setPuntuacion(100);
+				puntos = 100;
 			} else if (tiempo <= 15 && tiempo <= 19) {
-				jugador.setPuntuacion(50);
+				puntos = 50;
 			} else if (tiempo <= 20 && tiempo <= 24) {
-				jugador.setPuntuacion(25);
+				puntos = 25;
 			} else if (tiempo == 25) {
-				jugador.setPuntuacion(0);
+				puntos = 0;
 			}
-
+			jugador.getPuntuacion();
+			puntos = puntos + jugador.getPuntuacion();
+			jugador.setPuntuacion(puntos);
 			jd.insertarPuntuacionDao(conn, jugador);
 		} finally {
 			try {

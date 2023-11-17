@@ -112,6 +112,8 @@ public class JugadorDao {
 		PreparedStatement stmt = null;
 
 		try {
+			
+			
 			String sql = "UPDATE JUGADORES SET PUNTUACION=? WHERE ID=?";
 			stmt = conn.prepareStatement(sql);
 
