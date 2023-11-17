@@ -55,6 +55,7 @@ public class Interfaz extends JPanel {
     private JLabel flechaA;
 
     public Interfaz(PanelInicio pI) throws SQLException {
+    	setBackground(new Color(113, 191, 208));
 
         this.pI = pI;
         setLayout(null);
@@ -77,7 +78,7 @@ public class Interfaz extends JPanel {
         txtPregunta.setAutoscrolls(false);
         txtPregunta.setEditable(false);
         txtPregunta.setWrapStyleWord(true);
-        txtPregunta.setBackground(new Color(128, 128, 128));
+        txtPregunta.setBackground(new Color(255, 255, 255));
         txtPregunta.setFont(new Font("Monospaced", Font.PLAIN, 40));
         txtPregunta.setLineWrap(true);
 
@@ -92,14 +93,14 @@ public class Interfaz extends JPanel {
         btnA.setFont(new Font("Tahoma", Font.PLAIN, 16));
         btnA.setOpaque(true);
         btnA.setActionCommand("A");
-        btnA.setBackground(new Color(255, 128, 128));
+        btnA.setBackground(new Color(235, 84, 84));
         btnA.setForeground(new Color(0, 0, 0));
         btnA.setBounds(20, 677, 812, 134);
         add(btnA);
 
         btnB = new JButton(pregunta.getListaRespuesta().get(1));
         btnB.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        btnB.setBackground(new Color(128, 255, 255));
+        btnB.setBackground(new Color(115, 123, 232));
         btnB.setActionCommand("B");
         btnA.setOpaque(true);
         btnB.setBounds(20, 822, 812, 134);
@@ -107,18 +108,17 @@ public class Interfaz extends JPanel {
 
         btnC = new JButton(pregunta.getListaRespuesta().get(2));
         btnC.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        btnC.setBackground(new Color(128, 255, 128));
+        btnC.setBackground(new Color(40, 204, 94));
         btnC.setActionCommand("C");
         btnA.setOpaque(true);
         btnC.setBounds(1135, 677, 767, 134);
         add(btnC);
-        // TODO poner flecha en la repuesta seleccionada, poner bonito el login, poner
-        // tamaño fijo a la ventana al frame, que sea fijo, quitar barra de arriba,
+
 
         btnD = new JButton(pregunta.getListaRespuesta().get(3));
         btnD.setFont(new Font("Tahoma", Font.PLAIN, 16));
         btnD.setActionCommand("D");
-        btnD.setBackground(new Color(255, 255, 128));
+        btnD.setBackground(new Color(234, 237, 116));
         btnA.setOpaque(true);
         btnD.setBounds(1135, 824, 767, 134);
         add(btnD);
