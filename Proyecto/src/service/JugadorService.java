@@ -2,7 +2,6 @@ package service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 import bd.OpenConnection;

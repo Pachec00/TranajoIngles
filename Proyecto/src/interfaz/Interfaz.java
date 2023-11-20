@@ -15,7 +15,6 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 import controlador.service.ControlService;
-import modelo.Jugador;
 import modelo.Preguntas;
 import service.PreguntasService;
 
