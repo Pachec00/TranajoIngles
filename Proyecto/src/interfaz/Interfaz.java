@@ -306,7 +306,7 @@ public class Interfaz extends JPanel {
         timerInfinito.stop();
         timer.start();
         primeraVez = true;
-        lblNumeroPregunta.setText(id + "/9");
+        lblNumeroPregunta.setText(id + "/9 Questions");
         puntos=pI.consultarPuntuacion();
         lblPuntuacion.setText("Points: "+puntos);
         revalidate();
