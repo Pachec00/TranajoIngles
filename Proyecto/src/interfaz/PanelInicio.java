@@ -53,6 +53,7 @@ public class PanelInicio extends JFrame {
 		lblBienvenida.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBienvenida.setBounds(10, 127, 1904, 111);
 		getContentPane().add(lblBienvenida);
+		lblBienvenida.requestFocus();
 
 		JLabel lblNewLabel = new JLabel("TO");
 		lblNewLabel.setFont(new Font("Segoe Print", Font.PLAIN, 30));
@@ -86,9 +87,10 @@ public class PanelInicio extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					//TODO se guarda el jugador que devuelve el servicio
+
 					jugador = new Jugador();
-					jugador.setNombre(textFieldUsuario.getText());
+					if(!textFieldUsuario.getText().isEmpty()) {
+						jugador.setNombre(textFieldUsuario.getText());
 					jugador.setPuntuacion(0);
 					jugador=js.registrarJugador(jugador);
 					if (jugador.getId()!=null) {
@@ -96,9 +98,13 @@ public class PanelInicio extends JFrame {
 						btnRegistrar.setEnabled(false);
 						interfaz.empezarTimer();
 					} else {
-						JOptionPane.showMessageDialog(null, "EL NOMBRE YA EXISTE", "ERROR", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "That name already exists", "ERROR", JOptionPane.ERROR_MESSAGE);
 
 					}
+					}else{
+						JOptionPane.showMessageDialog(null, "Please write something", "ERROR", JOptionPane.ERROR_MESSAGE);
+					}
+					
 					
 
 				} catch (JugadorsServiceException e1) {

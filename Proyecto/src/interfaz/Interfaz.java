@@ -73,7 +73,7 @@ public class Interfaz extends JPanel {
         lblPuntuacion.setFont(new Font("Tahoma", Font.PLAIN, 20));
         lblPuntuacion.setHorizontalAlignment(SwingConstants.CENTER);
         add(lblPuntuacion);
-
+        
         txtPregunta = new JTextArea();
         txtPregunta.setAutoscrolls(false);
         txtPregunta.setEditable(false);

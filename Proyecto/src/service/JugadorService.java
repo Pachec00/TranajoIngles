@@ -72,7 +72,7 @@ public class JugadorService {
 				puntos = 100;
 			} else if (tiempo <= 15 || tiempo <= 19) {
 				puntos = 50;
-			} else if (tiempo <= 20 || tiempo <= 24) {
+			} else if (tiempo <= 20 || tiempo <= 25) {
 				puntos = 25;
 			}
 			

@@ -29,9 +29,9 @@ public class TablaModel extends AbstractTableModel {
 
 	public String getColumnName(int column) {
 		if (column == 0) {
-			return "Nombre";
+			return "Name";
 		} else{
-			return "Puntuacion";
+			return "Points";
 		} 
 	}
 

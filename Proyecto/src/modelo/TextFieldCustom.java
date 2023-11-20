@@ -1,6 +1,9 @@
 package modelo;
 
+import java.awt.Color;
 import java.awt.TextField;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -15,6 +18,7 @@ public class TextFieldCustom extends TextField {
 
 	public TextFieldCustom() {
 		longMax = 0;
+		
 		addKeyListener(new KeyListener() {
 
 			@Override
@@ -34,6 +38,19 @@ public class TextFieldCustom extends TextField {
 			@Override
 			public void keyPressed(KeyEvent e) {
 
+			}
+		});
+		
+		addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				setBackground(Color.LIGHT_GRAY);
 			}
 		});
 	}
