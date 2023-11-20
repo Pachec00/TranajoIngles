@@ -3,16 +3,19 @@ package interfaz;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import modelo.Jugador;
@@ -48,23 +51,12 @@ public class PanelInicio extends JFrame {
 		setUndecorated(true);
 		getContentPane().setLayout(null);
 
-		JLabel lblBienvenida = new JLabel("WELCOME");
-		lblBienvenida.setFont(new Font("Segoe Print", Font.PLAIN, 30));
-		lblBienvenida.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBienvenida.setBounds(10, 127, 1904, 111);
-		getContentPane().add(lblBienvenida);
-		lblBienvenida.requestFocus();
-
-		JLabel lblNewLabel = new JLabel("TO");
-		lblNewLabel.setFont(new Font("Segoe Print", Font.PLAIN, 30));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(10, 249, 1904, 85);
-		getContentPane().add(lblNewLabel);
-
-		JLabel lblQuien = new JLabel("WHO WANTS TO BE A ROBOT!");
+		JLabel lblQuien = new JLabel();
 		lblQuien.setFont(new Font("Segoe Print", Font.PLAIN, 30));
 		lblQuien.setHorizontalAlignment(SwingConstants.CENTER);
-		lblQuien.setBounds(10, 345, 1904, 203);
+		lblQuien.setBounds(100, 100, 1750, 500);
+		ImageIcon imagenIcon = new ImageIcon(getClass().getResource("/src/Logo.PNG"));
+		lblQuien.setIcon(new ImageIcon(imagenIcon.getImage().getScaledInstance(350, 350, Image.SCALE_SMOOTH)));
 		getContentPane().add(lblQuien);
 
 		JLabel lblUsuario = new JLabel("User");
@@ -77,10 +69,12 @@ public class PanelInicio extends JFrame {
 		textFieldUsuario.setBounds(859, 663, 215, 32);
 		getContentPane().add(textFieldUsuario);
 		textFieldUsuario.setColumns(10);
+		textFieldUsuario.setHorizontalAlignment(JTextField.CENTER);
 
 		JButton btnRegistrar = new JButton("Register");
 		btnRegistrar.setBounds(1122, 668, 89, 23);
 		getContentPane().add(btnRegistrar);
+
 
 		ActionListener acRegistrarUsuario = new ActionListener() {
 
@@ -89,23 +83,23 @@ public class PanelInicio extends JFrame {
 				try {
 
 					jugador = new Jugador();
-					if(!textFieldUsuario.getText().isEmpty()) {
+					if (!textFieldUsuario.getText().isEmpty()) {
 						jugador.setNombre(textFieldUsuario.getText());
-					jugador.setPuntuacion(0);
-					jugador=js.registrarJugador(jugador);
-					if (jugador.getId()!=null) {
-						textFieldUsuario.setEnabled(false);
-						btnRegistrar.setEnabled(false);
-						interfaz.empezarTimer();
-					} else {
-						JOptionPane.showMessageDialog(null, "That name already exists", "ERROR", JOptionPane.ERROR_MESSAGE);
+						jugador.setPuntuacion(0);
+						jugador = js.registrarJugador(jugador);
+						if (jugador.getId() != null) {
+							textFieldUsuario.setEnabled(false);
+							btnRegistrar.setEnabled(false);
+							interfaz.empezarTimer();
+						} else {
+							JOptionPane.showMessageDialog(null, "That name already exists", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
 
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Please write something", "ERROR",
+								JOptionPane.ERROR_MESSAGE);
 					}
-					}else{
-						JOptionPane.showMessageDialog(null, "Please write something", "ERROR", JOptionPane.ERROR_MESSAGE);
-					}
-					
-					
 
 				} catch (JugadorsServiceException e1) {
 					e1.printStackTrace();
@@ -141,22 +135,21 @@ public class PanelInicio extends JFrame {
 	}
 
 	public void añadirPuntuacion(Integer tiempo) {
-		
+
 		try {
 			js.insertarPuntuacionService(jugador, tiempo);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
+
 	public Jugador getJugador() {
 		return this.jugador;
 	}
+
 	public Integer consultarPuntuacion() {
-		
-		
-		
-		
+
 		return js.consultarPuntuacion(jugador);
 	}
 
